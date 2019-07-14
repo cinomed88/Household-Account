@@ -38,5 +38,35 @@ html, body {
     vertical-align: middle;
 }
 #list {
-    background-color: yellow;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-row-gap: 1px;
+    background-color: white;
+    padding: 2px;
+    vertical-align: middle;
+}
+#list_header {
+    display: grid;
+    grid-template-columns: 0.5fr 2fr 1fr 0.3fr 0.3fr;
+    border-bottom: 3px solid black;
+    padding-bottom: 2px;
+    
+}
+div.transaction {
+    display: grid;
+    grid-template-columns: 0.5fr 2fr 1fr 0.3fr 0.3fr;
+    grid-gap: 3px;
+    /* border-bottom: 1px dotted gray; */
+    padding-bottom: 2px;
+    vertical-align: middle;
+}
+div.transaction > div > img {
+    max-width: 90%;
+    vertical-align: middle;
+}
+#exx {
+    background-color: lightgray;
+}
+#exx2 {
+    background-color: lightgray;
 }
