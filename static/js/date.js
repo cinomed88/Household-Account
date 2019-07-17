@@ -9,6 +9,7 @@ var month = new Array('January', 'February', 'March' , 'April', 'May',
 
 $("#heading2").text( month[d.getMonth()] + ", " + d.getDate()
     + " (" + week[d.getDay()] + ")" );
+$("#time_input").text( d.getHours()+ ":" + d.getMinutes());
 
 {/* document.write('현재 년: ' + d.getFullYear() + '<br />');
 document.write('현재 월: ' + (d.getMonth() + 1) + '<br />');
