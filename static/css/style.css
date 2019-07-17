@@ -63,6 +63,7 @@ div.transaction {
 div.transaction > div > input {
     font-family: 'Raleway', sans-serif;
     text-align: center;
+    border:white;
 }
 div.transaction > div > img {
     max-width: 90%;
