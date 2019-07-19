@@ -1,12 +1,8 @@
 $(document).ready(function() {
-    var d = new Date();
-    var ctime = d.getFullYear() + "-" + (d.getMonth() + 1)
-     + "-" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes()
-     + ":" + d.getSeconds();
+
 
     $('#submit').click(function(e) {
-        let formData = { time: ctime,
-                         description: $("#description_input").val(),
+        let formData = { description: $("#description_input").val(),
                          expense: $("#expense_input").val()
                        };
         console.log("Form data to send:", formData);
