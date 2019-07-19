@@ -59,11 +59,24 @@
 
       <div class="transaction">
         <div class="time" id="time_input"></div>
-        <div class="description"><input type="text" placeholder="Description" size="20"></div>
-        <div class="expense"><input type="text" placeholder="Expense" size="7" pattern="[0-9]{7}"></div>
-        <div class="item_photo"><input type="button" value="I" size="1" onclick=""></div>
-        <div class="receipt_photo"><input type="button" value="R" size="1" onclick=""></div>
+        <div class="description">
+          <input id="description_input" type="text" placeholder="Description" size="20">
+        </div>
+        <div class="expense">
+          <input id="expense_input" type="text" placeholder="Expense" size="7" pattern="[0-9]{7}">
+        </div>
+        <div class="item_photo">
+          <input id="item_photo_input" type="button" value="I" size="1" onclick="">
+        </div>
+        <div class="receipt_photo">
+          <input id="receipt_photo_input" type="button" value="R" size="1" onclick="">
+        </div>
       </div>
+      <div>
+          <input id="submit" type="button" value="Submit"/>
+          <p id="p2"></p>
+      </div>
+
 
     </div>
   </div>
@@ -71,6 +84,7 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="/js/date.js"></script>
+  <script src="/js/submit.js"></script>
 
 
 </body>
