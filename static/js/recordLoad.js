@@ -9,13 +9,16 @@ $(document).ready(function () {
         // data: { name: userId },
         success: function (data) {
             console.log("Success Data Load! :", data);
-            //only its time part should be selected to be shown
-            $("#tr1 div.time").text(data[0].time);
-            $("#tr1 div.description").text(data[0].description);
-            $("#tr1 div.expense").text(data[0].expense);
-            //img1
-            //img2
 
+            for (var i=0; i<data.length; i++){
+                var d = new Date(data[i].time);
+                console.log(d);
+                $("#tr"+(i+1)+" div.time").text(d.getHours() +":"+ d.getMinutes()); //UTC+0 time?
+                $("#tr"+(i+1)+" div.description").text(data[i].description);
+                $("#tr"+(i+1)+" div.expense").text(data[i].expense);
+                //img1
+                //img2
+            }
 
 
         },

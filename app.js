@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
 app.get('/ajax-GET-record', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     
-    let qs = 'SELECT time, description, expense, img1, img2 FROM record';
+    let qs = "SELECT time, description, expense, img1, img2 FROM record WHERE DATE(time) = DATE(NOW())";
     let qsQuery = mysql.format(qs, ["time", "description", "expense", "img1", "img2"]);
     connection.query(qsQuery, (err, data) => {
         if (err) {
