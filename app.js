@@ -19,6 +19,24 @@ app.get('/', (req, res) => {
     res.send(indexPage);
 });
 
+app.get('/ajax-GET-record', (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
+    
+    let qs = 'SELECT time, description, expense, img1, img2 FROM record';
+    let qsQuery = mysql.format(qs, ["time", "description", "expense", "img1", "img2"]);
+    connection.query(qsQuery, (err, data) => {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        console.log(data);
+        res.send(data);
+    })
+
+});
+
+
+
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
@@ -27,15 +45,17 @@ app.use(bodyParser.json());
 app.post('/post-submit', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
     console.log("Stuff sent to server", req.body);
-    res.send(["You sent me:", req.body]);
+    res.send(["Saved:", req.body]);
     var sql = "INSERT INTO record VALUES (null, Now(), '" 
         +req.body.description+"', '"+req.body.expense+"', null, null)";
   
-    connection.query(sql, function (err) {
-        if (err) throw err;
+    connection.query(sql, function (err, results, fields) {
+        if (err) {
+            console.log(err);
+            throw err;
+        }
+        console.log(results);
 
-        // res.render('index', { title: 'Date Saved',
-        //     message: 'Date Saved successfully.'})
     });
     
 });

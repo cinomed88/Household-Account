@@ -13,6 +13,8 @@ $(document).ready(function() {
             data: formData,
             success: function(data) {
                 console.log("SUCCESS JSON:", data);
+                $(description_input).val('');
+                $(expense_input).val('');
                 $("#p2").html(data[0] + " " + data[1]['description']
                               + " " + data[1]['expense']
                              );

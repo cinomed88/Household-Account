@@ -70,9 +70,6 @@ div.transaction > div > img {
     vertical-align: middle;
 }
 
-#exx {
-    background-color: lightgray;
-}
-#exx2 {
+div.odd_row {
     background-color: lightgray;
 }
