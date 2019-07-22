@@ -11,7 +11,35 @@
     @import url('https://fonts.googleapis.com/css?family=Raleway:900|Lato:300');
   </style>
   
-  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script>
+  <script src="/js/date.js"></script>
+  <script src="/js/submit.js"></script>
+  <!-- <script src="/js/imgUpload.js"></script> -->
+  <script src="/js/recordLoad.js"></script>
+
+<script>
+    $(document).ready(function () {
+        var form = $('#frmUploader')[0];
+        var data = new FormData(form);
+
+        $.ajax({
+            url: "/api/Upload",
+            enctype: 'multipart/form-data',
+            processData: false,
+            contentsType: false,
+            cache: false,
+            type: "POST",
+            success: function(data) {
+                console.log("SUCCESS JSON:", data);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log("ERROR:", jqXHR, textStatus, errorThrown);
+            }
+        });
+    });
+</script>
+
 </head>
 
 <body>
@@ -125,19 +153,21 @@
         </div>
       </div>
       <div>
-          <input id="submit" type="button" value="Submit"/>
+          
+          <!-- <input id="submit" type="button" value="Submit"/> -->
           <p id="p2"></p>
       </div>
 
 
     </div>
+    
   </div>
+<form id="frmUploader" enctype="multipart/form-data" action="api/Upload/" method="post">
+    <input type="file" name="imgUploader" value="ProductImg" multiple />
+    <input type="submit" name="submit" id="btnSubmit" value="Upload" />
+</form>
 
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="/js/date.js"></script>
-  <script src="/js/submit.js"></script>
-  <script src="/js/recordLoad.js"></script>
 
 </body>
 

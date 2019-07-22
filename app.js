@@ -1,6 +1,7 @@
 var fs = require('fs');
 var bodyParser = require('body-parser');
 var express = require('express');
+var multer = require('Multer');
 var app = express();
 var mysql = require('mysql');
 var connection = mysql.createConnection({
@@ -34,13 +35,32 @@ app.get('/ajax-GET-record', (req, res) => {
     })
 
 });
+///////////////////////img upload/////////////////////////////////////////
+app.use(bodyParser.json()); // parse application/json
 
+var Storage = multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, "./Images");
+    },
+    filename: function (req, file, callback) {
+        callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
+    }
+});
+var upload = multer({ storage: Storage }).array("imgUploader", 3); //Field name and max count
 
+app.post("/api/Upload", function (req, res) {
+    upload(req, res, function (err) {
+        if (err) {
+            console.log(err);
+            return res.end("Something went wrong!");
+        }
+        return res.end("File uploaded sucessfully!.");
+    });
+});
+////////////////////////////////////////////////////////////////////////
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
-// parse application/json
-app.use(bodyParser.json());
 
 app.post('/post-submit', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
