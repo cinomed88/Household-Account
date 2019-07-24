@@ -25,11 +25,13 @@ app.get('/', (req, res) => {
     res.send(indexPage);
 });
 
+
+
 app.get('/ajax-GET-record', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     
-    let qs = "SELECT time, description, expense, img1, img2 FROM record WHERE DATE(time) = DATE(NOW())";
-    let qsQuery = mysql.format(qs, ["time", "description", "expense", "img1", "img2"]);
+    let qs = "SELECT time, description, expense, img FROM record WHERE DATE(time) = DATE(NOW())";
+    let qsQuery = mysql.format(qs, ["time", "description", "expense", "img"]);
     connection.query(qsQuery, (err, data) => {
         if (err) {
             console.error(err);
@@ -54,34 +56,48 @@ var upload = multer({ storage: Storage }).array("imgUploader", 1); //Field name 
 
 app.post('/uploadImage', (req, res) => {
     upload(req, res, (err) => {
+        console.log(req.files[0].path);
         if (err) {
             console.log(err);
             return;
         }
-        console.log("image part end");
-        // res.redirect('/');
+        var imgsql = "UPDATE record SET img = 'C:\Users\Narukana\Documents\Github\Household-Account" +req.files[0].path+ "' ORDER BY time DESC LIMIT 1";
+  
+        connection.query(imgsql, (err, results, fields) => {
+            if (err) {
+                console.log(err);
+                throw err;
+            }
+        //console.log(results);
+        console.log("image path uploaded in db");
+        });
+
+        res.redirect('/');
     });
 });
 
 ////////////////////////////////////////////////////////////////////////
+
+///////////////////////text info upload/////////////////////////////////////////
 
 app.post('/post-submit', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     console.log("Stuff sent to server", req.body);
     res.send(["Saved:", req.body]);
     var sql = "INSERT INTO record VALUES (null, Now(), '" 
-        +req.body.description+"', '"+req.body.expense+"', null, null)";
+        +req.body.description+"', '"+req.body.expense+"', null)";
   
     connection.query(sql, (err, results, fields) => {
         if (err) {
             console.log(err);
             throw err;
         }
-        console.log(results);
-        console.log("text part end");
+        // console.log(results);
     });
     
 });
+//////////////////////////////////////////////////////////////////////////////////
+
 
 var port = 8001;
 app.listen(port, () => {
