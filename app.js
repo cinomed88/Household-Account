@@ -3,6 +3,8 @@ var bodyParser = require('body-parser');
 var express = require('express');
 var multer = require('Multer');
 var app = express();
+// var router = express.Router();
+
 var mysql = require('mysql');
 var connection = mysql.createConnection({
     host : 'localhost',
@@ -14,6 +16,9 @@ var connection = mysql.createConnection({
 app.use('/css', express.static('static/css'));
 app.use('/img', express.static('static/img'));
 app.use('/js', express.static('static/js'));
+app.use(bodyParser.json()); // parse application/json
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => {
     let indexPage = fs.readFileSync('./static/index.html', 'utf8');
@@ -30,52 +35,50 @@ app.get('/ajax-GET-record', (req, res) => {
             console.error(err);
             return;
         }
-        console.log(data);
         res.send(data);
     })
 
 });
+
 ///////////////////////img upload/////////////////////////////////////////
-app.use(bodyParser.json()); // parse application/json
 
 var Storage = multer.diskStorage({
-    destination: function (req, file, callback) {
-        callback(null, "./Images");
+    destination: (req, file, callback) => {
+        callback(null, "./tempImages");
     },
-    filename: function (req, file, callback) {
-        callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
+    filename: (req, file, callback) => {
+        callback(null, file.originalname);
     }
 });
-var upload = multer({ storage: Storage }).array("imgUploader", 3); //Field name and max count
+var upload = multer({ storage: Storage }).array("imgUploader", 1); //Field name and max count
 
-app.post("/api/Upload", function (req, res) {
-    upload(req, res, function (err) {
+app.post('/uploadImage', (req, res) => {
+    upload(req, res, (err) => {
         if (err) {
             console.log(err);
-            return res.end("Something went wrong!");
+            return;
         }
-        return res.end("File uploaded sucessfully!.");
+        console.log("image part end");
+        // res.redirect('/');
     });
 });
+
 ////////////////////////////////////////////////////////////////////////
 
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }));
-
-app.post('/post-submit', function (req, res) {
+app.post('/post-submit', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     console.log("Stuff sent to server", req.body);
     res.send(["Saved:", req.body]);
     var sql = "INSERT INTO record VALUES (null, Now(), '" 
         +req.body.description+"', '"+req.body.expense+"', null, null)";
   
-    connection.query(sql, function (err, results, fields) {
+    connection.query(sql, (err, results, fields) => {
         if (err) {
             console.log(err);
             throw err;
         }
         console.log(results);
-
+        console.log("text part end");
     });
     
 });

@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
 
-    $('#submit').click(function(e) {
+    $('#btnSubmit').click(function(e) {
         let formData = { description: $("#description_input").val(),
                          expense: $("#expense_input").val()
                        };
@@ -11,13 +11,13 @@ $(document).ready(function() {
             dataType: "json",
             type: "POST",
             data: formData,
-            success: function(data) {
+            success: (data) => {
                 console.log("SUCCESS JSON:", data);
                 $(description_input).val('');
                 $(expense_input).val('');
                 
                 $("#p2").html(data[0] + " " + data[1]['description']
-                              + " " + data[1]['expense']
+                              + ", " + data[1]['expense']
                              );
 
             },
@@ -26,25 +26,31 @@ $(document).ready(function() {
                 console.log("ERROR:", jqXHR, textStatus, errorThrown);
             }
         });
+
     });
 
+    // $('#btnSubmit').click(function(e) {
+
+    //     var form = $('#frmUploader')[0];
+    //     var formdata = new FormData(form);
+    //     console.log(formdata);
+
+    //     $.ajax({
+    //         url: "/uploadImage",
+    //         enctype: 'multipart/form-data',
+    //         processData: false,
+    //         contentsType: false,
+    //         cache: false,
+    //         data: formdata,
+    //         type: "POST",
+    //         success: (data) => {
+    //              console.log("SUCCESS Image Successfully", data);
+    //         },
+    //         error: function(jqXHR, textStatus, errorThrown) {
+    //             console.log("ERROR:", jqXHR, textStatus, errorThrown);
+    //         }
+    //     });
+    // });
 
 
-    var form = $('#frmUploader')[0];
-    var data = new FormData(form);
-
-    $.ajax({
-        url: "/api/Upload",
-        enctype: 'multipart/form-data',
-        processData: false,
-        contentsType: false,
-        cache: false,
-        type: "POST",
-        success: function(data) {
-            console.log("SUCCESS JSON:", data);
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.log("ERROR:", jqXHR, textStatus, errorThrown);
-        }
-    });
 });

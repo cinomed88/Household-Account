@@ -3,7 +3,7 @@ $(document).ready(function () {
     var data = new FormData(form);
 
     $.ajax({
-        url: "/api/Upload",
+        url: "/uploadImage",
         enctype: 'multipart/form-data',
         processData: false,
         contentsType: false,

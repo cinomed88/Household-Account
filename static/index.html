@@ -18,28 +18,6 @@
   <!-- <script src="/js/imgUpload.js"></script> -->
   <script src="/js/recordLoad.js"></script>
 
-<script>
-    $(document).ready(function () {
-        var form = $('#frmUploader')[0];
-        var data = new FormData(form);
-
-        $.ajax({
-            url: "/api/Upload",
-            enctype: 'multipart/form-data',
-            processData: false,
-            contentsType: false,
-            cache: false,
-            type: "POST",
-            success: function(data) {
-                console.log("SUCCESS JSON:", data);
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log("ERROR:", jqXHR, textStatus, errorThrown);
-            }
-        });
-    });
-</script>
-
 </head>
 
 <body>
@@ -49,10 +27,7 @@
       <span>Household Account</span>
     </div>
     
-    <div id="heading2">
-      
-    </div>
-
+    <div id="heading2"></div>
 
     <div id="list">
       <div id="list_header">
@@ -63,9 +38,9 @@
         <div>P2</div>
       </div>
       <div id="tr1" class="transaction" class="odd_row">
-        <div class="time">1</div>
-        <div class="description">2</div>
-        <div class="expense">3</div>
+        <div class="time"></div>
+        <div class="description">No data</div>
+        <div class="expense"></div>
         <div class="item_photo"><img src="/img/baseline_photo_black_18dp.png"/></div>
         <div class="receipt_photo"><img src="/img/receipt.png"/></div>
       </div>
@@ -133,41 +108,30 @@
         <div class="receipt_photo"><img src="/img/receipt.png"/></div>
       </div>
 
-      
-
-
-
-      <div class="transaction">
-        <div class="time" id="time_input"></div>
-        <div class="description">
-          <input id="description_input" type="text" placeholder="Description" size="20">
-        </div>
-        <div class="expense">
-          <input id="expense_input" type="text" placeholder="Expense" size="7" pattern="[0-9]{7}">
-        </div>
-        <div class="item_photo">
-          <input id="item_photo_input" type="button" value="I" size="1" onclick="">
-        </div>
-        <div class="receipt_photo">
-          <input id="receipt_photo_input" type="button" value="R" size="1" onclick="">
-        </div>
-      </div>
-      <div>
-          
-          <!-- <input id="submit" type="button" value="Submit"/> -->
-          <p id="p2"></p>
-      </div>
-
-
     </div>
-    
   </div>
-<form id="frmUploader" enctype="multipart/form-data" action="api/Upload/" method="post">
-    <input type="file" name="imgUploader" value="ProductImg" multiple />
-    <input type="submit" name="submit" id="btnSubmit" value="Upload" />
-</form>
+  <div id="addNewRecord">
+    <div class="transaction">
+      <div class="time" id="time_input"></div>
+      <div class="description">
+        <input id="description_input" type="text" placeholder="Description" size="20">
+      </div>
+      <div class="expense">
+        <input id="expense_input" type="text" placeholder="Expense" size="7" pattern="[0-9]{7}">
+      </div>
+    </div>
+    <form id="frmUploader" enctype="multipart/form-data" action="/uploadImage" method="post">    
+      <input type="file" name="imgUploader" value="ProductImg" accept="image/*" />
+      <input type="submit" name="submit" id="btnSubmit" value="Upload" />
+    </form>
 
+    <div>
+        <input id="submit" type="button" value="Submit"/>
+        <p id="p2"></p>
+        <p id="p3"></p>
+    </div>
 
+  </div>
 
 </body>
 
