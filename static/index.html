@@ -34,32 +34,39 @@
         <div>Time</div>
         <div>Description</div>
         <div>Expense</div>
-        <div>P1</div>
+        <div>Pic</div>
       </div>
             
     </div>
-  </div>
-  <div id="addNewRecord">
-    <div class="transaction">
-      <div class="time" id="time_input"></div>
-      <div class="description">
-        <input id="description_input" type="text" placeholder="Description" size="20">
-      </div>
-      <div class="expense">
-        <input id="expense_input" type="text" placeholder="Expense" size="7" pattern="[0-9]{7}">
-      </div>
-    </div>
-    <form id="frmUploader" enctype="multipart/form-data" action="/uploadImage" method="post">    
-      <input type="file" name="imgUploader" value="ProductImg" accept="image/*" />
-      <input type="submit" name="submit" id="btnSubmit" value="Submit" />
-    </form>
 
-    <div>
-        <p id="p2"></p>
-        <p id="p3"></p>
+    <div id="todaySummary">
+      <h4 id="summaryTitle">Daily Summary</h4>
+      <p id="totalExpenseForm"> Total Expense :&emsp;$ <span id="totalExpense"></span></p>
     </div>
+    <!--  Add Transaction record  -->
+    <div id="addNewRecord">
+        <h4 id="addTitle">Add Transaction</h4>
 
+      <div class="transaction">
+        <div class="time" id="time_input"></div>
+        <div class="description">
+          <input id="description_input" type="text" placeholder="Description" size="20">
+        </div>
+        <div class="expense">
+          <input id="expense_input" type="text" placeholder="Expense" size="7" pattern="[0-9]{7}">
+        </div>
+      </div>
+      <form id="frmUploader" enctype="multipart/form-data" action="/uploadImage" method="post">    
+        <input type="file" name="imgUploader" value="ProductImg" accept="image/*" />
+        <input type="submit" name="submit" id="btnSubmit" value="Submit" />
+      </form>
+      <div>
+          <p id="p2"></p>
+      </div>
+  
+    </div>
   </div>
+  
 
 </body>
 

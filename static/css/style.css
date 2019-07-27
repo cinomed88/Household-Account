@@ -70,6 +70,22 @@ div.transaction > div > a > img {
     vertical-align: middle;
 }
 
-div.odd_row {
+#todaySummary {
     background-color: lightgray;
 }
+#summaryTitle, #addTitle {
+    background-color: #0173BC;
+    color: white;
+    padding: 5px;
+    margin: 0;
+}
+#totalExpenseForm {
+    float: left;
+    padding: 10px;
+    margin: 0;
+}
+
+
+
+
+

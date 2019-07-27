@@ -2,6 +2,7 @@ var fs = require('fs');
 var bodyParser = require('body-parser');
 var express = require('express');
 var multer = require('Multer');
+const url = require('url');
 var app = express();
 // var router = express.Router();
 
@@ -29,8 +30,11 @@ app.get('/', (req, res) => {
 /////////////////////// transaction record load /////////////////////////////////////////
 app.get('/ajax-GET-record', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
-    
-    let qs = "SELECT time, description, expense, img FROM record WHERE DATE(time) = DATE(NOW())";
+
+    let q = url.parse(req.url, true);
+    console.log(q.query['Date']);
+
+    let qs = "SELECT time, description, expense, img FROM record WHERE DATE(time) = '"+q.query['Date']+"'";
     let qsQuery = mysql.format(qs, ["time", "description", "expense", "img"]);
     connection.query(qsQuery, (err, data) => {
         if (err) {
