@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
 });
 
 
-
+/////////////////////// transaction record load /////////////////////////////////////////
 app.get('/ajax-GET-record', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     
@@ -41,6 +41,7 @@ app.get('/ajax-GET-record', (req, res) => {
     })
 
 });
+////////////////////////////////////////////////////////////////////////
 
 ///////////////////////img upload/////////////////////////////////////////
 
@@ -61,8 +62,11 @@ app.post('/uploadImage', (req, res) => {
             console.log(err);
             return;
         }
-        var imgsql = "UPDATE record SET img = 'C:\Users\Narukana\Documents\Github\Household-Account" +req.files[0].path+ "' ORDER BY time DESC LIMIT 1";
-  
+        // var imgsql = "UPDATE record SET img = 'C:\\\\Users\\\\Narukana\\\\Documents\\\\Github\\\\Household-Account\\\\tempImages\\\\" +req.files[0].filename+ "' ORDER BY time DESC LIMIT 1";
+        // To save URLs for web server: http://127.0.0.1:8887/ ...
+        var imgsql = "UPDATE record SET img = 'http://127.0.0.1:8887/" +req.files[0].filename+ "' ORDER BY time DESC LIMIT 1";
+        
+        console.log(imgsql);
         connection.query(imgsql, (err, results, fields) => {
             if (err) {
                 console.log(err);

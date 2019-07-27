@@ -47,14 +47,14 @@ html, body {
 }
 #list_header {
     display: grid;
-    grid-template-columns: 0.5fr 2fr 1fr 0.3fr 0.3fr;
+    grid-template-columns: 0.5fr 2fr 1fr 0.3fr;
     border-bottom: 3px solid black;
     padding-bottom: 2px;
     
 }
 div.transaction {
     display: grid;
-    grid-template-columns: 0.5fr 2fr 1fr 0.3fr 0.3fr;
+    grid-template-columns: 0.5fr 2fr 1fr 0.3fr;
     grid-gap: 3px;
     /* border-bottom: 1px dotted gray; */
     padding-bottom: 2px;
@@ -65,8 +65,8 @@ div.transaction > div > input {
     text-align: center;
     border:white;
 }
-div.transaction > div > img {
-    max-width: 90%;
+div.transaction > div > a > img {
+    max-width: 95%;
     vertical-align: middle;
 }
 

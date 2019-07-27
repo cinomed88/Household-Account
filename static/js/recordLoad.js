@@ -6,18 +6,28 @@ $(document).ready(function () {
         beforeSend: function () {
             //console.log("beforeSend function");
         },
-        // data: { name: userId },
         success: function (data) {
             console.log("Success Data Load! :", data);
-
+        
             for (var i=0; i<data.length; i++){
+                var record = '<div id="tr'+i+'" class="transaction" class="odd_row"></div>';
+                var time = '<div class="time"></div>';
+                var description = '<div class="description"></div>';
+                var expense = '<div class="expense"></div>';
+                var img = '<div class="img"><a href=""><img src="/img/receipt.png"/></a></div>';
+
+                $("#list").append(record);
+                $("#tr"+i).append(time);
+                $("#tr"+i).append(description);
+                $("#tr"+i).append(expense);
+                $("#tr"+i).append(img);
+
                 var d = new Date(data[i].time);
                 console.log(d);
-                $("#tr"+(i+1)+" div.time").text(d.getHours() +":"+ d.getMinutes()); //UTC+0 time?
-                $("#tr"+(i+1)+" div.description").text(data[i].description);
-                $("#tr"+(i+1)+" div.expense").text(data[i].expense);
-                //img1
-                //img2
+                $("#tr"+i+" div.time").text(d.getHours() +":"+ d.getMinutes()); //UTC+0 time?
+                $("#tr"+i+" div.description").text(data[i].description);
+                $("#tr"+i+" div.expense").text(data[i].expense);
+                $("#tr"+i+" div.img > a").attr("href", data[i].img);
             }
 
 
