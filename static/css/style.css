@@ -7,38 +7,40 @@ html, body {
 }
 #grid_container {
     display: grid;
-    width:100%;
+    width: 100%;
 }
 #heading1 {
     display: grid;
-    grid-template-columns: 70px 1fr;
+    grid-template-columns: 60px 1fr;
     background-color: white;
     width: 100%;
     height: 50px;
-    font-size: 3.5vmax;
+    font-size: 20pt;
     vertical-align: middle;
 }
-#heading1 img {
-    display: inline;
+#heading1 a img {
+    display: inline-block;
     width: auto;
     height: 50px;
-    float: left;
+    /* float: left; */
 }
 #heading1 span {
-    padding: 5px;
+    padding: 8px 5px 5px 5px;
     color: black;
+    vertical-align: middle;
 }
-#heading2 {
+#heading2_border {
     width: 100%;
-    height: 30px;
-    padding: 5px;
+    height: 35px;
+    padding: 0;
     background-color: #0173BC;
-    font-size: 3vmax;
+    font-size: 20pt;
     color: white;
     vertical-align: middle;
 }
 #list {
     display: grid;
+    width: 100%;
     grid-template-columns: 1fr;
     grid-row-gap: 1px;
     background-color: white;
@@ -50,12 +52,11 @@ html, body {
     grid-template-columns: 0.5fr 2fr 1fr 0.3fr;
     border-bottom: 3px solid black;
     padding-bottom: 2px;
-    
 }
 div.transaction {
     display: grid;
     grid-template-columns: 0.5fr 2fr 1fr 0.3fr;
-    grid-gap: 3px;
+    grid-gap: 1px;
     /* border-bottom: 1px dotted gray; */
     padding-bottom: 2px;
     vertical-align: middle;
@@ -65,8 +66,17 @@ div.transaction > div > input {
     text-align: center;
     border:white;
 }
+#frmUploader {
+    margin-top: 3px;
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+    border:white;
+}
+div.transaction > div {
+    padding-top: 2px;
+}
 div.transaction > div > a > img {
-    max-width: 95%;
+    max-height: 25px;
     vertical-align: middle;
 }
 
@@ -85,7 +95,31 @@ div.transaction > div > a > img {
     margin: 0;
 }
 
-
+.button {
+    display: inline-block;
+    background-color: #0173BC;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 0;
+    width: 50px;
+    font-size: 25pt;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 0;
+    vertical-align: middle;
+  }
+  .button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+  }
+  #btnMinusDate {
+      float: left;
+  }
+  #btnPlusDate {
+      float: right;
+  }
 
 
 

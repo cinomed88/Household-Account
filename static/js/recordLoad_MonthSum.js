@@ -1,68 +1,36 @@
-$(document).ready(function () {
-
-    var week = new Array('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat');    
+$(document).ready(function () {   
     var month = new Array('January', 'February', 'March' , 'April', 'May', 
         'June', 'July', 'August', 'September', 'October', 'November', 'December');
-    
+
     var currentTime = new Date();
 
-    function setDate(d){
+    function setMonth(d){
         var mm = String(d.getMinutes()).padStart(2, '0');
         var hh = String(d.getHours()).padStart(2, '0');
         var dd = String(d.getDate()).padStart(2, '0');
         var mm = String(d.getMonth() + 1).padStart(2, '0');
         var yyyy = d.getFullYear();
 
-        $("#heading2").text( month[d.getMonth()] + ", " + d.getDate()
-            + " (" + week[d.getDay()] + ")" );
-        $("#time_input").text( hh + ":" + mm);  // remove??
+        $("#heading2").text( month[d.getMonth()] + ", " + d.getFullYear() );
 
-        var cDate = yyyy +'-'+ mm +'-'+ dd;
-        var showDate = {Date : cDate};
-        return showDate;
+        // var cDate = yyyy +'-'+ mm;
+        var showMonth = {Month : mm, Year: yyyy};
+        return showMonth;
     }
 
-    var showDate = setDate(currentTime);
+    var showMonth = setMonth(currentTime);
 
 
     $('#btnPlusDate').click(function(e) {
-        currentTime.setDate(currentTime.getDate() + 1);
-        showDate = setDate(currentTime);
+        currentTime.setMonth(currentTime.getMonth() + 1);
+        showMonth = setMonth(currentTime);
         loadRecord();
-        // $.ajax({
-        //     url: "/plus-date",
-        //     dataType: "json",
-        //     type: "GET",
-        //     data: showDate,
-        //     success: (data) => {
-        //         console.log("plus succeed", data);
-        //         loadRecord();
-        //     },
-        //     error: function(jqXHR, textStatus, errorThrown) {
-        //         $("#p2").text(jqXHR.statusText);
-        //         console.log("ERROR:", jqXHR, textStatus, errorThrown);
-        //     }
-        // });
 
     });
     $('#btnMinusDate').click(function(e) {
-        currentTime.setDate(currentTime.getDate() - 1);
-        showDate = setDate(currentTime);
+        currentTime.setMonth(currentTime.getMonth() - 1);
+        showMonth = setMonth(currentTime);
         loadRecord();
-        // $.ajax({
-        //     url: "/minus-date",
-        //     dataType: "json",
-        //     type: "GET",
-        //     data: showDate,
-        //     success: (data) => {
-        //         console.log("minus succeed", data);
-        //         loadRecord();
-        //     },
-        //     error: function(jqXHR, textStatus, errorThrown) {
-        //         $("#p2").text(jqXHR.statusText);
-        //         console.log("ERROR:", jqXHR, textStatus, errorThrown);
-        //     }
-        // });
 
     });
 
@@ -71,9 +39,9 @@ $(document).ready(function () {
 
     function loadRecord(){
         $.ajax({
-            url: "/ajax-GET-record",
+            url: "/ajax-GET-monthly-record",
             dataType: "json",
-            data: showDate,
+            data: showMonth,
             type: "GET",
             beforeSend: function () {
                 //console.log("beforeSend function");
@@ -98,7 +66,7 @@ $(document).ready(function () {
                     $("#tr"+i).append(img);
     
                     var d = new Date(data[i].time);
-                    $("#tr"+i+" div.time").text(String(d.getHours()).padStart(2,'0') +":"+ String(d.getMinutes()).padStart(2,'0')); //UTC+0 time?
+                    $("#tr"+i+" div.time").text(String(d.getMonth()).padStart(2,'0') +"/"+ String(d.getDate()).padStart(2,'0')); //UTC+0 time?
                     $("#tr"+i+" div.description").text(data[i].description);
                     $("#tr"+i+" div.expense").text(data[i].expense);
                     $("#tr"+i+" div.img > a").attr("href", data[i].img);
@@ -115,6 +83,4 @@ $(document).ready(function () {
     
         })
     }
-
-
 });

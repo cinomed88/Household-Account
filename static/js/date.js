@@ -1,27 +1,29 @@
 $(document).ready(function(){
+    $('#btnSubmit').click(function(e) {
+        let formData = { description: $("#description_input").val(),
+                         expense: $("#expense_input").val()
+                       };
+        console.log("Form data to send:", formData);
+        $.ajax({
+            url: "/post-submit",
+            dataType: "json",
+            type: "POST",
+            data: formData,
+            success: (data) => {
+                console.log("SUCCESS JSON:", data);
+                $(description_input).val('');
+                $(expense_input).val('');
+                
+                $("#p2").html(data[0] + " " + data[1]['description']
+                              + ", " + data[1]['expense']
+                             );
 
-var d = new Date();
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                $("#p2").text(jqXHR.statusText);
+                console.log("ERROR:", jqXHR, textStatus, errorThrown);
+            }
+        });
 
-var week = new Array('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat');
-
-var month = new Array('January', 'February', 'March' , 'April', 'May', 
-    'June', 'July', 'August', 'September', 'October', 'November', 'December');
-
-$("#heading2").text( month[d.getMonth()] + ", " + d.getDate()
-    + " (" + week[d.getDay()] + ")" );
-$("#time_input").text( d.getHours()+ ":" + d.getMinutes());
-
-{/* document.write('현재 년: ' + d.getFullYear() + '<br />');
-document.write('현재 월: ' + (d.getMonth() + 1) + '<br />');
-document.write('현재 일: ' + d.getDate() + '<br />');
-
-document.write('<br />'); // 줄바꿈
-
-document.write('현재 시: ' + d.getHours() + '<br />');
-document.write('현재 분: ' + d.getMinutes() + '<br />');
-document.write('현재 초: ' + d.getSeconds() + '<br />');
-
-document.write('<br />');
-
-document.write('오늘 요일: ' + d.getDay() + '<br />'); // 일요일 = 0 */}
+    });
 });

@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Household Account</title>
+  <title>Monthly Summary</title>
   <link rel="stylesheet" href="/css/style.css">
   
   <style>
@@ -16,15 +16,14 @@
   <!-- <script src="/js/date.js"></script> -->
   <script src="/js/submit.js"></script>
   <!-- <script src="/js/imgUpload.js"></script> -->
-  <script src="/js/recordLoad.js"></script>
- 
+  <script src="/js/recordLoad_MonthSum.js"></script>
 
 </head>
 
 <body>
   <div id="grid_container">
     <div id="heading1">
-      <a href="/MonthSum.html" id="sum_link"><img src="/img/baseline_menu_black_18dp.png"/></a>
+      <img src="/img/baseline_menu_black_18dp.png"/>
       <span>Household Account</span>
     </div>
     <div id="heading2_border">
@@ -34,7 +33,7 @@
     </div>
     <div id="list">
       <div id="list_header">
-        <div>Time</div>
+        <div>Date</div>
         <div>Description</div>
         <div>Expense</div>
         <div>P</div>
@@ -44,7 +43,7 @@
     </div>
 
     <div id="todaySummary">
-      <h4 id="summaryTitle">Daily Summary</h4>
+      <h4 id="summaryTitle">Monthly Summary</h4>
       <p id="totalExpenseForm"> Total Expense :&emsp;$ <span id="totalExpense"></span></p>
     </div>
     <!--  Add Transaction record  -->

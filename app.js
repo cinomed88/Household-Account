@@ -26,15 +26,24 @@ app.get('/', (req, res) => {
     res.send(indexPage);
 });
 
+// app.get('/MonthSum.html', (req, res) => {
+//     res.sendFile(path.join(__dirname, 'html', 'MonthSum.html'));
+// });
+app.get('/MonthSum.html', (req, res) => {
+    let SumPage = fs.readFileSync('./static/html/MonthSum.html', 'utf8');
+    res.send(SumPage);
+});
+
 
 /////////////////////// transaction record load /////////////////////////////////////////
 app.get('/ajax-GET-record', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     let q = url.parse(req.url, true);
-    console.log(q.query['Date']);
+    console.log("displayed date: ", q.query['Month']);
+    let dispDate = q.query['Month'];
 
-    let qs = "SELECT time, description, expense, img FROM record WHERE DATE(time) = '"+q.query['Date']+"'";
+    let qs = "SELECT time, description, expense, img FROM record WHERE DATE(time) = '"+dispDate+"'";
     let qsQuery = mysql.format(qs, ["time", "description", "expense", "img"]);
     connection.query(qsQuery, (err, data) => {
         if (err) {
@@ -45,8 +54,54 @@ app.get('/ajax-GET-record', (req, res) => {
     })
 
 });
-////////////////////////////////////////////////////////////////////////
+///////////////////////// Monthly transaction record load ///////////////////////////////////////////////
+app.get('/ajax-GET-monthly-record', (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
 
+    let q = url.parse(req.url, true);
+    console.log("displayed Month: ", q.query['Month'], q.query['Year']);
+    let dispMonth = q.query['Month'];
+    let dispYear = q.query['Year'];
+
+    let qs = "SELECT time, description, expense, img FROM record WHERE MONTH(time) = '"+dispMonth+"' AND YEAR(time) = '"+dispYear+"'";
+    let qsQuery = mysql.format(qs, ["time", "description", "expense", "img"]);
+    connection.query(qsQuery, (err, data) => {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        res.send(data);
+    })
+
+});
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// app.get('/plus-date', (req, res) => {
+//     res.setHeader('Content-Type', 'application/json');
+//     let q = url.parse(req.url, true);
+//     console.log("date+1", q.query['Date']);
+//     cDate = q.query['Date'];
+//     var showDate = {Date : cDate};
+//     res.send(showDate);
+
+//     // res.redirect('/ajax-GET-record/?Date='+cDate);
+//     // res.redirect('/');
+
+// })
+
+// app.get('/minus-date', (req, res) => {
+//     res.setHeader('Content-Type', 'application/json');
+//     let q = url.parse(req.url, true);
+//     console.log(q.query['Date']);
+//     cDate = q.query['Date'];
+//     var showDate = {Date : cDate};
+//     res.send(showDate);
+//     //var showDate = {Date : cDate};
+
+//     // res.redirect('/');
+
+// })
 ///////////////////////img upload/////////////////////////////////////////
 
 var Storage = multer.diskStorage({
