@@ -40,8 +40,8 @@ app.get('/ajax-GET-record', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     let q = url.parse(req.url, true);
-    console.log("displayed date: ", q.query['Month']);
-    let dispDate = q.query['Month'];
+    console.log("displayed date: ", q.query['Date']);
+    let dispDate = q.query['Date'];
 
     let qs = "SELECT time, description, expense, img FROM record WHERE DATE(time) = '"+dispDate+"'";
     let qsQuery = mysql.format(qs, ["time", "description", "expense", "img"]);
