@@ -1,12 +1,12 @@
 {
   "name": "household-account",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Household-Account",
   "main": "app.js",
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
-    "multer": "^1.2.0"
+    "multer": "^1.4.2"
   },
   "author": {
     "name": "lucas"
