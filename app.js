@@ -14,6 +14,7 @@ var connection = mysql.createConnection({
     database : 'pp1'
 });
 
+
 app.use('/css', express.static('static/css'));
 app.use('/img', express.static('static/img'));
 app.use('/js', express.static('static/js'));
