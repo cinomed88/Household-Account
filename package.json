@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "start": "node app.js"
+  },
   "name": "household-account",
   "version": "1.0.0",
   "description": "Household-Account",
@@ -12,4 +15,5 @@
   "author": {
     "name": "lucas"
   }
+  
 }
