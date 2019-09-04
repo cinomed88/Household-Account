@@ -165,5 +165,5 @@ app.post('/post-submit', (req, res) => {
 
 var port = 8001;
 app.listen(process.env.PORT || port, () => {
-    console.log("This app is listening on port " + port + "!", this.address().port, app.settings.env);
+    console.log("This app is running!");
 });
