@@ -1,7 +1,7 @@
 var fs = require('fs');
 var bodyParser = require('body-parser');
 var express = require('express');
-var multer = require('Multer');
+var multer = require('multer');
 const url = require('url');
 var app = express();
 // var router = express.Router();
