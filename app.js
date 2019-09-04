@@ -113,32 +113,32 @@ var Storage = multer.diskStorage({
         callback(null, file.originalname);
     }
 });
-var upload = multer({ storage: Storage }).array("imgUploader", 1); //Field name and max count
+// var upload = multer({ storage: Storage }).array("imgUploader", 1); //Field name and max count
 
-app.post('/uploadImage', (req, res) => {
-    upload(req, res, (err) => {
-        console.log(req.files[0].path);
-        if (err) {
-            console.log(err);
-            return;
-        }
-        // var imgsql = "UPDATE record SET img = 'C:\\\\Users\\\\Narukana\\\\Documents\\\\Github\\\\Household-Account\\\\tempImages\\\\" +req.files[0].filename+ "' ORDER BY time DESC LIMIT 1";
-        // To save URLs for web server: http://127.0.0.1:8887/ ...
-        var imgsql = "UPDATE record SET img = 'http://127.0.0.1:8887/" +req.files[0].filename+ "' ORDER BY time DESC LIMIT 1";
+// app.post('/uploadImage', (req, res) => {
+//     upload(req, res, (err) => {
+//         console.log(req.files[0].path);
+//         if (err) {
+//             console.log(err);
+//             return;
+//         }
+//         // var imgsql = "UPDATE record SET img = 'C:\\\\Users\\\\Narukana\\\\Documents\\\\Github\\\\Household-Account\\\\tempImages\\\\" +req.files[0].filename+ "' ORDER BY time DESC LIMIT 1";
+//         // To save URLs for web server: http://127.0.0.1:8887/ ...
+//         var imgsql = "UPDATE record SET img = 'http://127.0.0.1:8887/" +req.files[0].filename+ "' ORDER BY time DESC LIMIT 1";
         
-        console.log(imgsql);
-        connection.query(imgsql, (err, results, fields) => {
-            if (err) {
-                console.log(err);
-                throw err;
-            }
-        //console.log(results);
-        console.log("image path uploaded in db");
-        });
+//         console.log(imgsql);
+//         connection.query(imgsql, (err, results, fields) => {
+//             if (err) {
+//                 console.log(err);
+//                 throw err;
+//             }
+//         //console.log(results);
+//         console.log("image path uploaded in db");
+//         });
 
-        res.redirect('/');
-    });
-});
+//         res.redirect('/');
+//     });
+// });
 
 ////////////////////////////////////////////////////////////////////////
 
