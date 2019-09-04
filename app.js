@@ -7,11 +7,17 @@ var app = express();
 // var router = express.Router();
 
 var mysql = require('mysql');
+// var connection = mysql.createConnection({
+//     host : 'localhost',
+//     user : 'root',
+//     password : '1234',
+//     database : 'pp1'
+// });
 var connection = mysql.createConnection({
-    host : 'localhost',
-    user : 'root',
-    password : '1234',
-    database : 'pp1'
+    host : 'us-cdbr-iron-east-02.cleardb.net',
+    user : 'b6005f49a9ce67',
+    password : '6f9bd90a',
+    database : 'heroku_4a6b6bdb689fe0d'
 });
 
 
